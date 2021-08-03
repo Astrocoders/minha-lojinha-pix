@@ -1,9 +1,9 @@
-import cn from 'classnames';
-import React, { forwardRef, useRef } from 'react';
-import mergeRefs from 'react-merge-refs';
-import s from './Button.module.css';
+import cn from 'classnames'
+import React, { forwardRef, useRef } from 'react'
+import mergeRefs from 'react-merge-refs'
+import s from './Button.module.css'
 
-import LoadingDots from '@/components/ui/LoadingDots';
+import LoadingDots from '@/components/LoadingDots'
 
 const Button = forwardRef((props, buttonRef) => {
   const {
@@ -17,8 +17,8 @@ const Button = forwardRef((props, buttonRef) => {
     style = {},
     Component = 'button',
     ...rest
-  } = props;
-  const ref = useRef(null);
+  } = props
+  const ref = useRef(null)
   const rootClassName = cn(
     s.root,
     {
@@ -27,7 +27,7 @@ const Button = forwardRef((props, buttonRef) => {
       [s.disabled]: disabled
     },
     className
-  );
+  )
 
   return (
     <Component
@@ -49,7 +49,7 @@ const Button = forwardRef((props, buttonRef) => {
         </i>
       )}
     </Component>
-  );
-});
+  )
+})
 
-export default Button;
+export default Button

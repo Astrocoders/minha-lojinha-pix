@@ -4,9 +4,9 @@ export const getURL = () => {
       ? process.env.URL
       : process?.env?.VERCEL_URL && process.env.VERCEL_URL !== ''
       ? process.env.VERCEL_URL
-      : 'http://localhost:3000';
-  return url.includes('http') ? url : `https://${url}`;
-};
+      : 'http://localhost:3000'
+  return url.includes('http') ? url : `https://${url}`
+}
 
 export const postData = async ({ url, token, data = {} }) => {
   const res = await fetch(url, {
@@ -14,17 +14,27 @@ export const postData = async ({ url, token, data = {} }) => {
     headers: new Headers({ 'Content-Type': 'application/json', token }),
     credentials: 'same-origin',
     body: JSON.stringify(data)
-  });
+  })
 
   if (res.error) {
-    throw error;
+    throw error
   }
 
-  return res.json();
-};
+  return res.json()
+}
 
 export const toDateTime = (secs) => {
-  var t = new Date('1970-01-01T00:30:00Z'); // Unix epoch start.
-  t.setSeconds(secs);
-  return t;
-};
+  var t = new Date('1970-01-01T00:30:00Z') // Unix epoch start.
+  t.setSeconds(secs)
+  return t
+}
+
+export const eres = (promise) => {
+  return promise
+    .then(function (result) {
+      return [null, result]
+    })
+    .catch(function (err) {
+      return [err]
+    })
+}

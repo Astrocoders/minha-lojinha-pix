@@ -1,17 +1,17 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
+import Head from 'next/head'
+import { useRouter } from 'next/router'
 
-import Navbar from '@/components/ui/Navbar';
-import Footer from '@/components/ui/Footer';
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
 export default function Layout({ children, meta: pageMeta }) {
-  const router = useRouter();
+  const router = useRouter()
   const meta = {
-    title: 'Next.js Subscription Starter',
-    description: 'Brought to you by Vercel, Stripe, and Supabase.',
+    title: 'Vanna checkout',
+    description: 'Brought to you by Vercel & Vanna.',
     cardImage: '/og.png',
     ...pageMeta
-  };
+  }
 
   return (
     <>
@@ -39,5 +39,5 @@ export default function Layout({ children, meta: pageMeta }) {
       <main id="skip">{children}</main>
       <Footer />
     </>
-  );
+  )
 }
