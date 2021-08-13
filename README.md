@@ -5,6 +5,9 @@
 
 # Minha Lojinha Pix
 
+Crie uma lojinha grátis em 0 segundos com o Vanna!
+A lojinha mostra seus produtos e serviços cadastrados na plataforma usando a nossa API GraphQL.
+
 ## Como subir sua própria versão
 
 ### No Vercel
