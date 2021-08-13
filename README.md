@@ -17,7 +17,7 @@ Requisitos:
 1. Enviei seus dados e aguarde aprovação
 1. Clique no botão abaixo
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAstrocoders%2Fminha-lojinha-pix&env=VANNA_API,VANNA_SECRET,NEXT_PUBLIC_SITE_NAME)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAstrocoders%2Fminha-lojinha-pix&env=VANNA_API,VANNA_SECRET,NEXT_PUBLIC_SITE_NAME,REDIRECT_TO)
 
 
 ## Configuração necessária do Vanna
