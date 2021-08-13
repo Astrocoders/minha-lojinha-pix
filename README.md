@@ -1,7 +1,11 @@
-# Vanna-Calendly-Full
+<p align="center">
+  <img src="./screenshot.png" /> 
+  <br />
+</p>
+
+# Minha Lojinha Pix
 
 ## Como subir sua própria versão
-
 
 ### No Vercel
 
@@ -16,13 +20,10 @@ Requisitos:
 
 | Env var | Descrição |
 | ------- | ------- |
-| API_KEY_SECRET | Chave da API obtida na plataforma |
-| API_KEY_ID | Chave da API obtida na plataforma |
-| ITEM_ID | Id do produto ou serviço na plataforma. Ex: `UHJvZHVjdDo1ODhkYmNiNy1iYjc5LTQ2YzEtOGI5Zi00MDY2NzQwYmQ5YmU=` |
-
-## Check form on Calendly
-
-![Calendly](./screenshot_form_calendly.png)
+| VANNA_ID | Chave da API obtida na plataforma |
+| VANNA_SECRET | Chave da API obtida na plataforma |
+| REDIRECT_TO | URL que o usuário deve ser redirecionado após a compra |
+| NEXT_PUBLIC_SITE_NAME | Nome do seu site |
 
 ## Getting Started
 
