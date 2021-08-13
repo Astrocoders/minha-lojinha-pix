@@ -15,14 +15,32 @@ const RegisterSale = () => {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const handleSignup = async (e) => {
+  const handleSignup = (e) => {
     e.preventDefault()
-
     setLoading(true)
-    router.push({
-      pathname: '/pagar',
-      query: { serviceId, taxId, name, email }
+
+    fetch('/api/charge/create', {
+      method: "POST",
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        serviceId,
+        taxId,
+        name,
+        email
+      })
     })
+      .then((res) => res.json())
+      .then(({ charge, error}) => {
+        setLoading(false)
+        if (error) {
+          console.log(error)
+          return
+        }
+
+        router.replace(`/pagar/${charge.id}`)
+      }).catch(() => setLoading(false))
   }
 
   return (

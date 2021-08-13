@@ -109,7 +109,7 @@ export const createCharge = async ({ name, email, taxId, serviceId }) => {
         variables: {
           input: {
             customerId: customerData?.data?.customerCreate?.customer?.id,
-            description: `Agendamento para ${name}`,
+            description: `Cobrança para ${name}`,
             date,
             dueDate,
             items: [
@@ -133,3 +133,42 @@ export const createCharge = async ({ name, email, taxId, serviceId }) => {
   console.log(customerError, chargeError, chargeData)
   return [customerError || chargeError, chargeData?.data?.chargeCreate?.charge]
 }
+
+export const getCharge = async ({id}) => {
+  const [error, data] = await eres(
+    fetch(vannaEndpoint, {
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        ...credentials
+      },
+      body: JSON.stringify({
+        query: `
+        query ChargeQuery {
+          node(id: "${id}") {
+            __typename
+            ... on Charge {
+              customer {
+                id
+                name
+                email
+              }
+              id
+              status
+              amount
+              pixDynamicQrcode {
+                emvqrcps
+              }
+            }
+          }
+        }
+    `,
+        variables: {}
+      }),
+      method: 'POST'
+    }).then((res) => res.json())
+  )
+
+  return [error, data.data.node]
+}
+
