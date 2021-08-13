@@ -28,6 +28,12 @@ Requisitos:
 | REDIRECT_TO | URL que o usuário deve ser redirecionado após a compra |
 | NEXT_PUBLIC_SITE_NAME | Nome do seu site |
 
+## Casos de uso
+
+- Redirecionamento para o Calendly após a compra
+- Redirecionamento para assinatura de um documento utilizando a https://zapsign.com.br/ por exemplo
+- Etc
+
 ## Getting Started
 
 First, run the development server:
