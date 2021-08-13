@@ -17,7 +17,8 @@ Requisitos:
 1. Enviei seus dados e aguarde aprovação
 1. Clique no botão abaixo
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAstrocoders%2Fvanna-calendly-charge-redirect&env=API_KEY_ID,API_KEY_SECRET&envDescription=API_KEY_ID%2CAPI_KEY_SECRET&envLink=https%3A%2F%2Fbeta.vanna.app%2Fintegracoes&project-name=vanna-calendly&repo-name=vanna-calendly)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAstrocoders%2Fminha-lojinha-pix&env=VANNA_API,VANNA_SECRET,NEXT_PUBLIC_SITE_NAME)
+
 
 ## Configuração necessária do Vanna
 
