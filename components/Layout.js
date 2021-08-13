@@ -7,8 +7,8 @@ import Footer from '@/components/Footer'
 export default function Layout({ children, meta: pageMeta }) {
   const router = useRouter()
   const meta = {
-    title: 'Vanna checkout',
-    description: 'Brought to you by Vercel & Vanna.',
+    title: process.env.NEXT_PUBLIC_SITE_NAME,
+    description: 'Loja',
     cardImage: '/og.png',
     ...pageMeta
   }
@@ -22,7 +22,7 @@ export default function Layout({ children, meta: pageMeta }) {
         <meta content={meta.description} name="description" />
         <meta
           property="og:url"
-          content={`https://subscription-starter.vercel.app${router.asPath}`}
+          content={`https://vanna-store.vercel.app${router.asPath}`}
         />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={meta.title} />

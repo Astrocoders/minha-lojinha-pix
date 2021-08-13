@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, } from 'react'
 import QRCode from 'qrcode.react'
-import { eres } from '@/utils/helpers'
-
+import {createCharge} from '../vanna/api'
 import Logo from '@/components/Logo'
+import { useListenToCharge } from 'vanna/useWebsocket'
 
 const Purchase = ({
   id,
@@ -18,31 +18,10 @@ const Purchase = ({
   const { name = '' } = router.query
 
   if (error || !id) {
-    return <div>Caca</div>
+    return <div>Dados faltando</div>
   }
-  const [isPaid, setIsPaid] = useState(false)
 
-  useEffect(() => {
-    let timerIntervalId
-    let timerTimeoutId
-    const loadData = async () => {
-      const [error, result] = await eres(
-        fetch(`/api/charge/${id}`).then((res) => res.json())
-      )
-      if (result.status === 'PAID') {
-        setIsPaid(true)
-        clearInterval(timerIntervalId)
-        timerTimeoutId = setTimeout(() => router.replace(redirectTo), 3000)
-      }
-    }
-
-    timerIntervalId = setInterval(loadData, 1000 * 2)
-
-    return () => {
-      clearInterval(timerIntervalId)
-      clearTimeout(timerTimeoutId)
-    }
-  }, [])
+  const charge = useListenToCharge({id})
 
   const priceString = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -61,7 +40,7 @@ const Purchase = ({
           <div className="flex justify-center pb-12 ">
             <Logo width="64px" height="64px" />
           </div>
-          {isPaid ? (
+          {charge?.status === "PAID" ? (
             <div className="flex flex-col justify-center items-center">
               <p className="text-2xl">Pagamento efetuado com sucesso!</p>
               <p className="text-1xl">
@@ -91,110 +70,28 @@ export default Purchase
 export async function getServerSideProps({ query }) {
   const { serviceId, taxId, name, email } = query
 
-  const credentials = {
-    'api-key-secret': process.env.VANNA_SECRET,
-    'api-key-id': process.env.VANNA_ID
-  }
-
   if (!serviceId) {
     return {
       props: {
-        error: 'caca'
+        error: 'Dados estão faltando'
       }
     }
   }
 
-  const [customerError, customerData] = await eres(
-    fetch('https://stag-server.reconcilia.app/graphql', {
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        ...credentials
-      },
-      body: JSON.stringify({
-        query: `
-      mutation CustomerCreateMutation {
-        customerCreate(input: {
-          typeOfPeople: ${taxId > 12 ? 'LEGAL' : 'NATURAL'},
-          email: "${email}",
-          name: "${name}",
-          taxId: "${taxId.replace(/\.|\-|\//g, '')}"
-        }) {
-          error {
-            message
-          }
-          customer {
-            id
-          } 
-        }
-      }
-    `,
-        variables: {}
-      }),
-      method: 'POST'
-    }).then((res) => res.json())
-  )
+  const [error, charge] = await createCharge({
+    serviceId,
+    taxId,
+    name,
+    email
+  })
 
-  const dueDateRaw = new Date()
-  dueDateRaw.setHours(dueDateRaw.getHours() + 1)
-  const date = new Date().toISOString()
-  const dueDate = dueDateRaw.toISOString()
-
-  const [chargeError, chargeData] = await eres(
-    fetch('https://stag-server.reconcilia.app/graphql', {
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        ...credentials
-      },
-      body: JSON.stringify({
-        query: `
-      mutation ChargeCreateMutation($input: ChargeCreateInput!) {
-        chargeCreate(input: $input) {
-          error {
-            message
-          }
-          charge {
-            id
-            amount
-            pixDynamicQrcode {
-              emvqrcps
-            }
-          }
-        }
-      }
-    `,
-        variables: {
-          input: {
-            customerId: customerData?.data?.customerCreate?.customer?.id,
-            description: `Agendamento para ${name}`,
-            date,
-            dueDate,
-            items: [
-              {
-                discountAmount: 0,
-                freightAmount: 0,
-                insuranceAmount: 0,
-                itemId: serviceId,
-                othersAmount: 0,
-                quantity: 1
-              }
-            ],
-            paymentMethod: 'PIX'
-          }
-        }
-      }),
-      method: 'POST'
-    }).then((res) => res.json())
-  )
-
-  const charge = chargeData?.data?.chargeCreate?.charge
+  console.log(error)
 
   return {
     props: {
       id: charge.id,
       redirectTo: process.env.REDIRECT_TO,
-      error: customerError || chargeError,
+      error,
       amount: charge.amount,
       emvqrcps: charge?.pixDynamicQrcode?.emvqrcps
     }
