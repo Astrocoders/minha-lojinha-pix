@@ -11,7 +11,7 @@ export default function Footer() {
               <span className="rounded-full border border-gray-700 mr-2">
                 <Logo />
               </span>
-              <span>ACME</span>
+              <span>{process.env.NEXT_PUBLIC_SITE_NAME}</span>
             </a>
           </Link>
         </div>
@@ -25,25 +25,25 @@ export default function Footer() {
               </Link>
             </li>
             <li className="py-3 md:py-0 md:pb-4">
-              <Link href="/">
+              <a href="https://vanna.app/tarifas" target="_blank">
                 <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
-                  About
+                  Tarifas
                 </a>
-              </Link>
+              </a>
             </li>
             <li className="py-3 md:py-0 md:pb-4">
-              <Link href="/">
+              <a href="https://vanna.app/funcionalidades" target="_blank">
                 <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
-                  Careers
+                  Funcionalidades
                 </a>
-              </Link>
+              </a>
             </li>
             <li className="py-3 md:py-0 md:pb-4">
-              <Link href="/">
+              <a href="https://vanna.app/blog" target="_blank">
                 <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
                   Blog
                 </a>
-              </Link>
+              </a>
             </li>
           </ul>
         </div>
@@ -55,28 +55,32 @@ export default function Footer() {
               </p>
             </li>
             <li className="py-3 md:py-0 md:pb-4">
-              <Link href="/">
-                <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
-                  Privacy Policy
-                </a>
-              </Link>
+              <a
+                href="https://vanna.app/politica-privacidade"
+                target="_blank"
+                className="text-primary hover:text-accents-6 transition ease-in-out duration-150"
+              >
+                Política de Privacidade
+              </a>
             </li>
             <li className="py-3 md:py-0 md:pb-4">
-              <Link href="/">
-                <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
-                  Terms of Use
-                </a>
-              </Link>
+              <a
+                href="https://vanna.app/termos-uso"
+                target="_blank"
+                className="text-primary hover:text-accents-6 transition ease-in-out duration-150"
+              >
+                Termos de Uso
+              </a>
             </li>
           </ul>
         </div>
       </div>
       <div className="py-12 flex flex-col md:flex-row justify-between items-center space-y-4 bg-primary-2">
         <div>
-          <span>&copy; 2020 ACME, Inc. All rights reserved.</span>
+          <span>&copy; 2021 Vanna Gestão de Pagamentos LTDA.</span>
         </div>
         <div className="flex items-center">
-          <span className="text-primary">Crafted by</span>
+          <span className="text-primary">Feito com</span>
           <a href="https://vercel.com" aria-label="Vercel.com Link">
             <img
               src="/vercel.svg"

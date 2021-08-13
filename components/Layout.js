@@ -22,7 +22,7 @@ export default function Layout({ children, meta: pageMeta }) {
         <meta content={meta.description} name="description" />
         <meta
           property="og:url"
-          content={`https://vanna-store.vercel.app${router.asPath}`}
+          content={`https://minha-lojinha-pix.vercel.app${router.asPath}`}
         />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={meta.title} />
